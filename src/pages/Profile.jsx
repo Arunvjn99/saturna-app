@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { IdCard, Briefcase, Users } from 'lucide-react'
+import { IdCard, Landmark, Briefcase, Tag, Users } from 'lucide-react'
 import { useParticipant } from '../context/ParticipantContext.jsx'
 
 function Field({ label, value }) {
@@ -13,14 +13,20 @@ function Field({ label, value }) {
 
 const TABS = [
   { id: 'personal', label: 'Personal Details', icon: IdCard },
+  { id: 'bank', label: 'Bank Details', icon: Landmark },
   { id: 'employment', label: 'Employment', icon: Briefcase },
+  { id: 'classification', label: 'Classification', icon: Tag },
   { id: 'beneficiaries', label: 'Beneficiaries', icon: Users }
 ]
+
+const YES_NO = (v) => (v ? 'Yes' : 'No')
 
 export default function Profile() {
   const { participant } = useParticipant()
   const [tab, setTab] = useState('personal')
   const p = participant.profile
+  const c = p.compliance || {}
+  const cl = p.classification || {}
   const [first, ...rest] = participant.name.split(' ')
   const last = rest.join(' ')
   const badgeClass =
@@ -78,6 +84,8 @@ export default function Profile() {
                   <Field label="Social Security Number" value={p.ssn} />
                   <Field label="Gender" value={p.gender} />
                   <Field label="Marital Status" value={p.maritalStatus} />
+                  <Field label="Employee ID" value={p.employeeId} />
+                  <Field label="Employment Status" value={p.employmentStatus} />
                 </div>
               </section>
               <section className="panel">
@@ -92,14 +100,57 @@ export default function Profile() {
             </>
           )}
 
-          {tab === 'employment' && (
+          {tab === 'bank' && (
             <section className="panel">
-              <h3>Employment</h3>
+              <h3>Bank Details</h3>
+              <p className="panel-note">Used for direct deposit of any distributions.</p>
               <div className="pf-fields">
-                <Field label="Employer" value={p.employer} />
-                <Field label="Employee ID" value={p.employeeId} />
-                <Field label="Hire Date" value={p.hireDate} />
-                <Field label="Work Status" value={p.workStatus} />
+                <Field label="Direct Deposit" value={p.bankSetUp ? 'Set Up' : 'Not Set Up'} />
+              </div>
+              {!p.bankSetUp && (
+                <div className="actions">
+                  <a className="btn btn-secondary" href="#">
+                    Set Up Bank Information
+                  </a>
+                </div>
+              )}
+            </section>
+          )}
+
+          {tab === 'employment' && (
+            <>
+              <section className="panel">
+                <h3>Employment</h3>
+                <div className="pf-fields">
+                  <Field label="Employer" value={p.employer} />
+                  <Field label="Employee ID" value={p.employeeId} />
+                  <Field label="Hire Date" value={p.hireDate} />
+                  <Field label="Work Status" value={p.workStatus} />
+                  <Field label="Payroll Frequency" value={p.payrollFrequency} />
+                  <Field label="Employment Status" value={p.employmentStatus} />
+                </div>
+              </section>
+              <section className="panel">
+                <h3>Compliance</h3>
+                <div className="pf-fields">
+                  <Field label="Pending QDRO" value={YES_NO(c.qdro)} />
+                  <Field label="Officer" value={YES_NO(c.officer)} />
+                  <Field label="Highly Compensated Employee" value={YES_NO(c.hce)} />
+                  <Field label="Key Employee" value={YES_NO(c.keyEmployee)} />
+                  <Field label="Insider / Restricted" value={YES_NO(c.insider)} />
+                </div>
+              </section>
+            </>
+          )}
+
+          {tab === 'classification' && (
+            <section className="panel">
+              <h3>Employee Classification</h3>
+              <div className="pf-fields">
+                <Field label="Location" value={cl.location} />
+                <Field label="Division" value={cl.division} />
+                <Field label="Department" value={cl.department} />
+                <Field label="Paycode" value={cl.paycode} />
               </div>
             </section>
           )}

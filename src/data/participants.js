@@ -46,6 +46,11 @@ export const PARTICIPANTS = [
       workStatus: 'Full-Time',
       gender: 'Male',
       maritalStatus: 'Married',
+      employmentStatus: 'Active',
+      payrollFrequency: 'Bi-Weekly',
+      bankSetUp: true,
+      compliance: { qdro: false, officer: false, hce: false, keyEmployee: false, insider: false },
+      classification: { location: 'Austin, TX — HQ', division: 'Retirement Services', department: 'Operations', paycode: 'Salaried Bi-Weekly' },
       beneficiaries: [
         { name: 'Taylor Hale', relationship: 'Spouse', share: '70%' },
         { name: 'Riley Hale', relationship: 'Child', share: '30%' }
@@ -135,6 +140,11 @@ export const PARTICIPANTS = [
       workStatus: 'Full-Time',
       gender: 'Female',
       maritalStatus: 'Single',
+      employmentStatus: 'Active',
+      payrollFrequency: 'Bi-Weekly',
+      bankSetUp: false,
+      compliance: { qdro: false, officer: false, hce: false, keyEmployee: false, insider: false },
+      classification: { location: 'Denver, CO', division: 'Client Services', department: 'Support', paycode: 'Hourly Bi-Weekly' },
       beneficiaries: []
     },
     overall: { total: '$0.00', vested: '$0.00' },
@@ -187,6 +197,11 @@ export const PARTICIPANTS = [
       workStatus: 'Full-Time',
       gender: 'Male',
       maritalStatus: 'Single',
+      employmentStatus: 'Active',
+      payrollFrequency: 'Semi-Monthly',
+      bankSetUp: false,
+      compliance: { qdro: false, officer: false, hce: false, keyEmployee: false, insider: false },
+      classification: { location: 'Chicago, IL', division: 'Sales', department: 'Business Development', paycode: 'Salaried Semi-Monthly' },
       beneficiaries: []
     },
     overall: { total: '$0.00', vested: '$0.00' },
@@ -239,6 +254,11 @@ export const PARTICIPANTS = [
       workStatus: 'Full-Time',
       gender: 'Female',
       maritalStatus: 'Married',
+      employmentStatus: 'Active',
+      payrollFrequency: 'Semi-Monthly',
+      bankSetUp: true,
+      compliance: { qdro: false, officer: false, hce: true, keyEmployee: false, insider: false },
+      classification: { location: 'Seattle, WA', division: 'Portfolio Management', department: 'Investments', paycode: 'Salaried Semi-Monthly' },
       beneficiaries: [
         { name: 'Chris Sullivan', relationship: 'Spouse', share: '100%' }
       ]
@@ -300,6 +320,11 @@ export const PARTICIPANTS = [
       workStatus: 'Full-Time',
       gender: 'Male',
       maritalStatus: 'Single',
+      employmentStatus: 'Active',
+      payrollFrequency: 'Bi-Weekly',
+      bankSetUp: true,
+      compliance: { qdro: false, officer: false, hce: false, keyEmployee: false, insider: false },
+      classification: { location: 'Atlanta, GA', division: 'Marketing', department: 'Communications', paycode: 'Salaried Bi-Weekly' },
       beneficiaries: [
         { name: 'Hannah Parker', relationship: 'Sister', share: '100%' }
       ]
